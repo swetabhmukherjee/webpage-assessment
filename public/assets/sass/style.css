@@ -62,6 +62,10 @@ button {
   font-weight: 700;
 }
 
+.underline {
+  text-decoration: underline;
+}
+
 .line {
   border: solid 0.6px #e0e0e0;
   background-color: #d8d8d8;
@@ -78,6 +82,10 @@ button {
   color: #f0c978;
 }
 
+.pinkish-pink {
+  color: #ff998f;
+}
+
 .green-bg {
   background: #7dd8a9;
 }
@@ -86,82 +94,62 @@ button {
   background: #fda18e;
 }
 
+.silver-bg {
+  background: #bcbcbc;
+}
+
 .justify-content-end {
   -webkit-box-pack: end !important;
       -ms-flex-pack: end !important;
           justify-content: flex-end !important;
 }
 
-.range-wrap {
-  position: relative;
-  width: 100%;
-  padding: 1.5em 0;
-  /*  Giving more room for hover  */
-  max-width: 400px;
+.mb-2 {
+  margin-bottom: 0.5rem;
 }
 
-/* Custom Bar */
-.range-wrap::before {
-  content: "";
-  background: #fff;
-  width: 100%;
-  height: 8px;
-  display: block;
-  position: absolute;
-  border-radius: 4px;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
-  -webkit-transition: height 100ms ease;
-  transition: height 100ms ease;
+@-webkit-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-.range-wrap:hover::before {
-  height: 10px;
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-/*  Hide Original */
-.range {
-  width: 100%;
-  cursor: pointer;
-  opacity: 0;
+@-webkit-keyframes slideInFromTop {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
 }
 
-.bubble {
-  background: white;
-  border: 3px solid #cbd2da;
-  position: absolute;
-  border-radius: 50%;
-  width: 2rem;
-  height: 2rem;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
-  pointer-events: none;
-  /* Remove pointer events on Bubble so user can click on the actual thumb beaneath it!  */
-  color: transparent;
-  display: -ms-grid;
-  display: grid;
-  place-items: center;
-  /*  Place the number on the center  */
-  font-weight: bold;
-  -webkit-transition: color 100ms ease, -webkit-transform 100ms ease;
-  transition: color 100ms ease, -webkit-transform 100ms ease;
-  transition: color 100ms ease, transform 100ms ease;
-  transition: color 100ms ease, transform 100ms ease, -webkit-transform 100ms ease;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  /*  Prevent Accidentally highlighting the number while sliding the cursor  */
-}
-
-.range-wrap:hover .bubble,
-.range-wrap:focus .bubble {
-  color: black;
-  -webkit-transform: translateY(-50%) scale(1.5);
-          transform: translateY(-50%) scale(1.5);
-  padding: 0.1em;
+@keyframes slideInFromTop {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
 }
 
 /* Layout Styles */
@@ -509,9 +497,13 @@ nav .details {
 
 .homepage .dashboard__details .activity__details .right .heading {
   margin-bottom: 30px;
+  -webkit-animation: slideInFromTop 2s;
+          animation: slideInFromTop 2s;
 }
 
 .homepage .dashboard__details .activity__details .right .details {
+  -webkit-animation: slideInFromTop 2s;
+          animation: slideInFromTop 2s;
   width: 80%;
   margin: 0 auto;
 }
@@ -711,33 +703,39 @@ nav .details {
           box-shadow: 0 0 10px 0 rgba(121, 148, 152, 0.15);
   margin-bottom: 1000px;
   padding-bottom: 100px;
+  padding-top: 100px;
 }
 
 .homepage .dashboard__details .cards__list {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: (minmax(280px, 1fr))[auto-fill];
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  grid-gap: 20px;
-  -webkit-box-align: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch;
+  -webkit-column-count: 3;
+          column-count: 3;
+  margin: 1.5em;
+  padding: 0;
+  font-size: 0.85em;
 }
 
-.homepage .dashboard__details .cards__list--item .card {
+.homepage .dashboard__details .cards__list--item {
+  /* overflow: hidden; */
+  width: 25%;
+  display: inline-block;
+  margin: 0 0 1.5em;
+  width: 100%;
+  -webkit-transition: 1s all ease;
+  transition: 1s all ease;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-box-shadow: 2px 2px 4px 0 #ccc;
+          box-shadow: 2px 2px 4px 0 #ccc;
   width: 100%;
   border-radius: 4.2px;
-  -webkit-box-shadow: 0 0 10px 0 rgba(71, 88, 90, 0.47);
-          box-shadow: 0 0 10px 0 rgba(71, 88, 90, 0.47);
   background-color: #ffffff;
-  height: 100%;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
 }
 
-.homepage .dashboard__details .cards__list--item .card .header {
+.homepage .dashboard__details .cards__list--item .header {
   width: 100%;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
@@ -745,7 +743,7 @@ nav .details {
   padding: 0 20px;
 }
 
-.homepage .dashboard__details .cards__list--item .card .header .heading {
+.homepage .dashboard__details .cards__list--item .header .heading {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -758,7 +756,7 @@ nav .details {
           align-items: flex-start;
 }
 
-.homepage .dashboard__details .cards__list--item .card .header .heading .main {
+.homepage .dashboard__details .cards__list--item .header .heading .main {
   font-size: 5px;
   font-weight: 600;
   font-stretch: normal;
@@ -769,7 +767,7 @@ nav .details {
   color: #ffffff;
 }
 
-.homepage .dashboard__details .cards__list--item .card .header .heading .sub {
+.homepage .dashboard__details .cards__list--item .header .heading .sub {
   font-size: 7.5px;
   font-weight: bold;
   font-stretch: normal;
@@ -781,20 +779,41 @@ nav .details {
   text-decoration: underline;
 }
 
-.homepage .dashboard__details .cards__list--item .card .header .range-input {
+.homepage .dashboard__details .cards__list--item .header .range-input {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
 }
 
-.homepage .dashboard__details .cards__list--item .card .details {
+.homepage .dashboard__details .cards__list--item .header .range-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.homepage .dashboard__details .cards__list--item .header .bubble::after {
+  content: "%";
+}
+
+.homepage .dashboard__details .cards__list--item .header input[type=range] {
+  background: greenyellow;
+}
+
+.homepage .dashboard__details .cards__list--item .details {
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
   width: 100%;
 }
 
-.homepage .dashboard__details .cards__list--item .card .details .image {
+.homepage .dashboard__details .cards__list--item .details .image {
   background-image: url(../images/homepage/card/card-1.jpg);
   background-size: cover;
   height: 200px;
@@ -808,7 +827,7 @@ nav .details {
   background-repeat: no-repeat;
 }
 
-.homepage .dashboard__details .cards__list--item .card .details .image .text {
+.homepage .dashboard__details .cards__list--item .details .image .text {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -820,23 +839,23 @@ nav .details {
   width: 100%;
 }
 
-.homepage .dashboard__details .cards__list--item .card .details .image .text .top {
+.homepage .dashboard__details .cards__list--item .details .image .text .top {
   width: 100%;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
 }
 
-.homepage .dashboard__details .cards__list--item .card .details .image .text .social {
+.homepage .dashboard__details .cards__list--item .details .image .text .social {
   gap: 10px;
   color: #ffffff;
 }
 
-.homepage .dashboard__details .cards__list--item .card .details .image .text .price {
+.homepage .dashboard__details .cards__list--item .details .image .text .price {
   color: #ffffff;
 }
 
-.homepage .dashboard__details .cards__list--item .card .details .image .bottom-text {
+.homepage .dashboard__details .cards__list--item .details .image .bottom-text {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -848,18 +867,18 @@ nav .details {
   width: 100%;
 }
 
-.homepage .dashboard__details .cards__list--item .card .details .image .bottom-text button {
+.homepage .dashboard__details .cards__list--item .details .image .bottom-text button {
   border-radius: 30px;
   background-color: #dcc777;
   color: #fff;
   padding: 5px 20px;
 }
 
-.homepage .dashboard__details .cards__list--item .card .details .image .bottom-text button:hover {
+.homepage .dashboard__details .cards__list--item .details .image .bottom-text button:hover {
   cursor: pointer;
 }
 
-.homepage .dashboard__details .cards__list--item .card .details .image .bottom-text .bottom__text {
+.homepage .dashboard__details .cards__list--item .details .image .bottom-text .bottom__text {
   font-size: 15px;
   font-weight: 600;
   font-stretch: normal;
@@ -870,7 +889,7 @@ nav .details {
   color: #ffffff;
 }
 
-.homepage .dashboard__details .cards__list--item .card .details .image .bottom-text .location__details p {
+.homepage .dashboard__details .cards__list--item .details .image .bottom-text .location__details p {
   font-size: 8.3px;
   font-weight: 300;
   font-stretch: normal;
@@ -881,11 +900,11 @@ nav .details {
   color: #ffffff;
 }
 
-.homepage .dashboard__details .cards__list--item .card .details .lists {
+.homepage .dashboard__details .cards__list--item .details .lists {
   padding: 30px 20px;
 }
 
-.homepage .dashboard__details .cards__list--item .card .details .lists .list li {
+.homepage .dashboard__details .cards__list--item .details .lists .list li {
   list-style: square inside;
   font-size: 13px;
   font-weight: normal;
@@ -898,7 +917,7 @@ nav .details {
   margin-bottom: 13px;
 }
 
-.homepage .dashboard__details .cards__list--item .card .details .lists .list p {
+.homepage .dashboard__details .cards__list--item .details .lists .list p {
   font-size: 11px;
   font-weight: 300;
   font-stretch: normal;
@@ -910,7 +929,7 @@ nav .details {
   margin-bottom: 20px;
 }
 
-.homepage .dashboard__details .cards__list--item .card .details .top-links {
+.homepage .dashboard__details .cards__list--item .details .top-links {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -920,7 +939,7 @@ nav .details {
   height: 30px;
 }
 
-.homepage .dashboard__details .cards__list--item .card .details .top-links .recommend {
+.homepage .dashboard__details .cards__list--item .details .top-links .recommend {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
@@ -944,7 +963,7 @@ nav .details {
           justify-content: center;
 }
 
-.homepage .dashboard__details .cards__list--item .card .details .top-links .visit {
+.homepage .dashboard__details .cards__list--item .details .top-links .visit {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
@@ -968,7 +987,7 @@ nav .details {
           justify-content: center;
 }
 
-.homepage .dashboard__details .cards__list--item .card .details .footer-links {
+.homepage .dashboard__details .cards__list--item .details .footer-links {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -978,7 +997,7 @@ nav .details {
   height: 60px;
 }
 
-.homepage .dashboard__details .cards__list--item .card .details .footer-links .recommend {
+.homepage .dashboard__details .cards__list--item .details .footer-links .recommend {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
@@ -1003,7 +1022,7 @@ nav .details {
           justify-content: center;
 }
 
-.homepage .dashboard__details .cards__list--item .card .details .footer-links .visit {
+.homepage .dashboard__details .cards__list--item .details .footer-links .visit {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
